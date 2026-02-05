@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Expense</title>
+</head>
+<body>
+    <h2>Edit Expense</h2>
+
+    <form method="POST">
+        <label>Amount:</label><br>
+        <input type="number" step="0.01" name="amount" value="{{ expense.amount }}" required><br><br>
+
+        <label>Date:</label><br>
+        <input type="date" name="date" value="{{ expense.date }}" required><br><br>
+
+        <label>Category:</label><br>
+        <input type="text" name="category" value="{{ expense.category.name }}" required><br><br>
+
+        <label>Description:</label><br>
+        <input type="text" name="description" value="{{ expense.description }}"><br><br>
+
+        <label>Payment Method:</label><br>
+        <input type="text" name="payment_method" value="{{ expense.payment_method }}"><br><br>
+
+        <button type="submit">Update Expense</button>
+    </form>
+
+    <br>
+    <a href="/view">Back to Expenses</a>
+</body>
+</html>

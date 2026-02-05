@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analysis</title>
+</head>
+<body>
+    <h2>Category Totals</h2>
+    <ul>
+        {% for cat, amt in category_totals.items() %}
+        <li>{{ cat }}: {{ amt }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="/">Back to Home</a>
+</body>
+</html>
