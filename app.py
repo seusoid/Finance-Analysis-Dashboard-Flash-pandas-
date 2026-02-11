@@ -108,6 +108,10 @@ def add_budget():
 
     return render_template("add_budget.html", categories=categories)
 
+@app.route("/expenses")
+def expenses():
+    expenses = Expense.query.all()
+    return render_template("expenses.html", expenses=expenses)
 
 
 

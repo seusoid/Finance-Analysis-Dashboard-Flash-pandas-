@@ -1,14 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Finance Insight</title>
-</head>
-<body>
-    <h1>Finance Insight</h1>
-    <p>Your personal expense tracking and analysis dashboard.</p>
-    <a href="/add">Add Expense</a>
-    <a href="/add_budget">Add Budget</a>
+{% extends "base.html" %}
+{% block content %}
 
-</body>
-</html>
+<div class="text-center mb-5">
+    <h1 class="fw-bold">Finance Insight Dashboard</h1>
+    <p class="text-muted">Track expenses, analyze spending, and stay within budget</p>
+</div>
+
+<div class="row g-4">
+
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center p-3">
+            <h5>Add Expense</h5>
+            <p class="text-muted">Log daily expenses</p>
+            <a href="/add" class="btn btn-primary">Go</a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center p-3">
+            <h5>View Expenses</h5>
+            <p class="text-muted">Edit or delete records</p>
+            <a href="/expenses" class="btn btn-secondary">Go</a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center p-3">
+            <h5>Add Budget</h5>
+            <p class="text-muted">Set monthly budgets</p>
+            <a href="/add_budget" class="btn btn-warning">Go</a>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow-sm text-center p-3">
+            <h5>Analytics</h5>
+            <p class="text-muted">Visual insights & trends</p>
+            <a href="/dashboard" class="btn btn-success">Go</a>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

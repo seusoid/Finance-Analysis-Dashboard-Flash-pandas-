@@ -1,6 +1,8 @@
 import pandas as pd
 from models import Expense, Category
 from extensions import db
+import matplotlib
+matplotlib.use("Agg") 
 import matplotlib.pyplot as plt
 import seaborn as sns
 import os

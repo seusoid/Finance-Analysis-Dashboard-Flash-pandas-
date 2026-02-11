@@ -1,35 +1,35 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Finance Dashboard</title>
-</head>
-<body>
-    <h2>Finance Dashboard</h2>
+{% extends "base.html" %}
+{% block content %}
 
-    <h3>Spending by Category</h3>
-    <img src="{{ category_chart }}" alt="Category Chart">
+<h2 class="mb-4">Spending Analytics</h2>
 
-    <h3>Monthly Spending Trend</h3>
-    <img src="{{ monthly_chart }}" alt="Monthly Chart">
+<div class="row">
 
-    
-    <h3>Budget vs Actual Spending</h3>
-    {% if budget_chart %}
-    <img src="{{ budget_chart }}" alt="Budget vs Actual">
-    {% else %}
-    <p>No budget data available</p>
-    {% endif %}
-    
-    <h3>Spending Heatmap by Day/Week</h3>
-    {% if heatmap_chart %}
-    <img src="{{ heatmap_chart }}" alt="Spending Heatmap">
-    {% else %}
-    <p>No expense data available</p>
-    {% endif %}
-        
-    
+    <div class="col-md-6 mb-4">
+        <div class="card p-3 shadow-sm">
+            <h5>Category Breakdown</h5>
+            <img src="{{ category_chart }}" class="img-fluid">
+        </div>
+    </div>
 
-    <br><br>
-    <a href="/">Back to Home</a>
-</body>
-</html>
+    <div class="col-md-6 mb-4">
+        <div class="card p-3 shadow-sm">
+            <h5>Monthly Trends</h5>
+            <img src="{{ monthly_chart }}" class="img-fluid">
+        </div>
+    </div>
+
+    <div class="col-md-12 mb-4">
+        <div class="card p-3 shadow-sm">
+            <h5>Budget vs Actual</h5>
+            {% if budget_chart %}
+            <img src="{{ budget_chart }}" class="img-fluid">
+            {% else %}
+            <p>No budget data available</p>
+            {% endif %}
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
