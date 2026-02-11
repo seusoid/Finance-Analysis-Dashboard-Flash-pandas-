@@ -12,6 +12,23 @@
     <h3>Monthly Spending Trend</h3>
     <img src="{{ monthly_chart }}" alt="Monthly Chart">
 
+    
+    <h3>Budget vs Actual Spending</h3>
+    {% if budget_chart %}
+    <img src="{{ budget_chart }}" alt="Budget vs Actual">
+    {% else %}
+    <p>No budget data available</p>
+    {% endif %}
+    
+    <h3>Spending Heatmap by Day/Week</h3>
+    {% if heatmap_chart %}
+    <img src="{{ heatmap_chart }}" alt="Spending Heatmap">
+    {% else %}
+    <p>No expense data available</p>
+    {% endif %}
+        
+    
+
     <br><br>
     <a href="/">Back to Home</a>
 </body>

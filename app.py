@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 from datetime import datetime
 from extensions import db
+from analysis import get_expenses_df, plot_category_totals, plot_monthly_trends,plot_budget_vs_actual,plot_spending_heatmap
+from models import Category, Expense, Budget 
 
 
 app = Flask(__name__)
@@ -12,7 +14,6 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 # Initialize database
 db.init_app(app)
 
-from models import Category, Expense  # import models AFTER db
 
 @app.route("/")
 def home():
@@ -88,16 +89,43 @@ def delete_expense(expense_id):
     db.session.commit()
     return redirect(url_for("view_expenses"))
 
-from analysis import get_expenses_df, plot_category_totals, plot_monthly_trends
+
+@app.route("/add_budget", methods=["GET", "POST"])
+def add_budget():
+    from models import Category  # ensure Category is imported
+    categories = Category.query.all()
+
+    if request.method == "POST":
+        month = request.form["month"]
+        category_id = int(request.form["category"])
+        amount = float(request.form["amount"])
+
+        budget = Budget(month=month, category_id=category_id, amount=amount)
+        db.session.add(budget)
+        db.session.commit()
+
+        return redirect("/dashboard")
+
+    return render_template("add_budget.html", categories=categories)
+
+
+
 
 @app.route("/dashboard")
 def dashboard():
     df = get_expenses_df()
     category_chart = plot_category_totals(df)
     monthly_chart = plot_monthly_trends(df)
+
+    budgets = Budget.query.all()
+    budget_chart = plot_budget_vs_actual(df, budgets)
+    heatmap_chart = plot_spending_heatmap(df)
+
     return render_template("dashboard.html",
                            category_chart=category_chart,
-                           monthly_chart=monthly_chart)
+                           monthly_chart=monthly_chart,
+                           budget_chart=budget_chart,
+                           heatmap_chart=heatmap_chart)
 
 
 if __name__ == "__main__":

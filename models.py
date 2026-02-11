@@ -22,3 +22,14 @@ class Expense(db.Model):
 
     def __repr__(self):
         return f"<Expense {self.amount}>"
+
+class Budget(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    month = db.Column(db.String(20), nullable=False)
+    amount = db.Column(db.Float, nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable=False)
+
+    category = db.relationship("Category", backref="budgets")
+
+    def __repr__(self):
+        return f"<Budget {self.amount} for {self.category.name} in {self.month}>"
